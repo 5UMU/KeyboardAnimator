@@ -6,32 +6,42 @@
 //  Copyright © 2016 Ethan Setnik. All rights reserved.
 //
 
-protocol KeyboardAnimatorDataSource: class {
+public protocol KeyboardAnimatorDataSource: class {
   func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
   weak var keyboardAnimatorView: UIView? { get }
 }
 
-protocol KeyboardAnimatorDelegate: class {
+public extension KeyboardAnimatorDataSource {
+  public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
+
+  }
+
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: AnyObject?) {
+
+  }
+}
+
+public protocol KeyboardAnimatorDelegate: class {
   func keyboardWillTransition(direction: KeyboardDirection, notification: Notification)
 }
 
-enum KeyboardDirection {
+public enum KeyboardDirection {
   // swiftlint:disable:next type_name
-  case Up, Down
+  case up, down
 }
 
-enum KeyboardAnimatorError: Error {
+public enum KeyboardAnimatorError: Error {
   case MissingUserInfo
 }
 
-class KeyboardAnimator {
-  weak var dataSource: KeyboardAnimatorDataSource?
-  weak var delegate: KeyboardAnimatorDelegate?
+open class KeyboardAnimator {
+  public weak var dataSource: KeyboardAnimatorDataSource?
+  public weak var delegate: KeyboardAnimatorDelegate?
 
-  weak var showObserver: AnyObject?
-  weak var hideObserver: AnyObject?
+  private weak var showObserver: AnyObject?
+  private weak var hideObserver: AnyObject?
 
-  func register() {
+  public func register() {
 
     let center = NotificationCenter.default
 
@@ -56,7 +66,7 @@ class KeyboardAnimator {
     }
   }
 
-  func deregister() {
+  public func deregister() {
     let center = NotificationCenter.default
 
     if let showObserver = showObserver {
@@ -72,6 +82,8 @@ class KeyboardAnimator {
     }
   }
 
+  public init() {}
+
   deinit {
     deregister()
   }
@@ -80,9 +92,9 @@ class KeyboardAnimator {
     var direction: KeyboardDirection!
     switch notification.name {
     case NSNotification.Name.UIKeyboardWillShow:
-      direction = .Up
+      direction = .up
     case NSNotification.Name.UIKeyboardWillHide:
-      direction = .Down
+      direction = .down
     default:
       break
     }
@@ -101,7 +113,7 @@ class KeyboardAnimator {
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
     let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
     let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-    let keyboardFrmae = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+    let keyboardFrmae = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 
     self.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
 
