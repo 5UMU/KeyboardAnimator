@@ -6,19 +6,17 @@
 //  Copyright © 2016 Ethan Setnik. All rights reserved.
 //
 
+import UIKit
 public protocol KeyboardAnimatorDataSource: class {
   func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: Any?)
   weak var keyboardAnimatorView: UIView? { get }
 }
 
 public extension KeyboardAnimatorDataSource {
-  public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
+  public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {}
 
-  }
-
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: AnyObject?) {
-
-  }
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: Any?) {}
 }
 
 public protocol KeyboardAnimatorDelegate: class {

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0D37F782C96DCBFD7E006480B44BA8685F7D9EA8",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0D37F782C96DCBFD7E006480B44BA8685F7D9EA8" : 9223372036854775807,
+    "C9532DB34657C9B197EE3CA2A5C379A9162E6DF6" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C48C7F95-73CF-4E03-BC0B-EE65A9E296AA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0D37F782C96DCBFD7E006480B44BA8685F7D9EA8" : "KeyboardAnimator\/",
+    "C9532DB34657C9B197EE3CA2A5C379A9162E6DF6" : "..\/.."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KeyboardAnimator",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KeyboardAnimator.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/5UMU\/KeyboardAnimator.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0D37F782C96DCBFD7E006480B44BA8685F7D9EA8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:5UMU\/sumu_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C9532DB34657C9B197EE3CA2A5C379A9162E6DF6"
+    }
+  ]
+}

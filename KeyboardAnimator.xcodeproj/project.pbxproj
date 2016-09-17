@@ -27,7 +27,7 @@
 		AADCF8E31D8DAC64003C835E /* KeyboardAnimator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeyboardAnimator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADCF8E61D8DAC64003C835E /* KeyboardAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardAnimator.h; sourceTree = "<group>"; };
 		AADCF8E71D8DAC64003C835E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AADCF8EC1D8DAC64003C835E /* KeyboardAnimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyboardAnimatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AADCF8EC1D8DAC64003C835E /* KeyboardAnimator iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KeyboardAnimator iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADCF8F11D8DAC64003C835E /* KeyboardAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAnimatorTests.swift; sourceTree = "<group>"; };
 		AADCF8F31D8DAC64003C835E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AADCF8FD1D8DACB2003C835E /* KeyboardAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAnimator.swift; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				AADCF8E31D8DAC64003C835E /* KeyboardAnimator.framework */,
-				AADCF8EC1D8DAC64003C835E /* KeyboardAnimatorTests.xctest */,
+				AADCF8EC1D8DAC64003C835E /* KeyboardAnimator iOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,9 +103,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AADCF8E21D8DAC64003C835E /* KeyboardAnimator */ = {
+		AADCF8E21D8DAC64003C835E /* KeyboardAnimator iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AADCF8F71D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator" */;
+			buildConfigurationList = AADCF8F71D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator iOS" */;
 			buildPhases = (
 				AADCF8DE1D8DAC64003C835E /* Sources */,
 				AADCF8DF1D8DAC64003C835E /* Frameworks */,
@@ -116,14 +116,14 @@
 			);
 			dependencies = (
 			);
-			name = KeyboardAnimator;
+			name = "KeyboardAnimator iOS";
 			productName = KeyboardAnimator;
 			productReference = AADCF8E31D8DAC64003C835E /* KeyboardAnimator.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AADCF8EB1D8DAC64003C835E /* KeyboardAnimatorTests */ = {
+		AADCF8EB1D8DAC64003C835E /* KeyboardAnimator iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AADCF8FA1D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimatorTests" */;
+			buildConfigurationList = AADCF8FA1D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator iOS Tests" */;
 			buildPhases = (
 				AADCF8E81D8DAC64003C835E /* Sources */,
 				AADCF8E91D8DAC64003C835E /* Frameworks */,
@@ -134,9 +134,9 @@
 			dependencies = (
 				AADCF8EF1D8DAC64003C835E /* PBXTargetDependency */,
 			);
-			name = KeyboardAnimatorTests;
+			name = "KeyboardAnimator iOS Tests";
 			productName = KeyboardAnimatorTests;
-			productReference = AADCF8EC1D8DAC64003C835E /* KeyboardAnimatorTests.xctest */;
+			productReference = AADCF8EC1D8DAC64003C835E /* KeyboardAnimator iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -172,8 +172,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AADCF8E21D8DAC64003C835E /* KeyboardAnimator */,
-				AADCF8EB1D8DAC64003C835E /* KeyboardAnimatorTests */,
+				AADCF8E21D8DAC64003C835E /* KeyboardAnimator iOS */,
+				AADCF8EB1D8DAC64003C835E /* KeyboardAnimator iOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -217,7 +217,7 @@
 /* Begin PBXTargetDependency section */
 		AADCF8EF1D8DAC64003C835E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AADCF8E21D8DAC64003C835E /* KeyboardAnimator */;
+			target = AADCF8E21D8DAC64003C835E /* KeyboardAnimator iOS */;
 			targetProxy = AADCF8EE1D8DAC64003C835E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -336,7 +336,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.sumu.KeyboardAnimator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KeyboardAnimator;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -357,7 +357,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.sumu.KeyboardAnimator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = KeyboardAnimator;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
@@ -401,7 +401,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AADCF8F71D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator" */ = {
+		AADCF8F71D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AADCF8F81D8DAC64003C835E /* Debug */,
@@ -410,7 +410,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AADCF8FA1D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimatorTests" */ = {
+		AADCF8FA1D8DAC64003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimator iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AADCF8FB1D8DAC64003C835E /* Debug */,

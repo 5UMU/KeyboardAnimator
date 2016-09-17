@@ -4,4 +4,7 @@
    <FileRef
       location = "container:KeyboardAnimator.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:KeyboardAnimatorExample/KeyboardAnimatorExample.xcodeproj">
+   </FileRef>
 </Workspace>
