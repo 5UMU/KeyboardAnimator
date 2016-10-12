@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA879C531DAE878E00385820 /* KeyboardAnimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADCF9911D8E05B4003C835E /* KeyboardAnimator.framework */; };
 		AADCF9631D8E058F003C835E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCF9621D8E058F003C835E /* AppDelegate.swift */; };
 		AADCF9651D8E058F003C835E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCF9641D8E058F003C835E /* ViewController.swift */; };
 		AADCF9681D8E058F003C835E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADCF9661D8E058F003C835E /* Main.storyboard */; };
@@ -14,10 +15,23 @@
 		AADCF96D1D8E058F003C835E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AADCF96B1D8E058F003C835E /* LaunchScreen.storyboard */; };
 		AADCF9781D8E058F003C835E /* KeyboardAnimatorExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCF9771D8E058F003C835E /* KeyboardAnimatorExampleTests.swift */; };
 		AADCF9831D8E058F003C835E /* KeyboardAnimatorExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADCF9821D8E058F003C835E /* KeyboardAnimatorExampleUITests.swift */; };
-		AADCF9921D8E05B4003C835E /* KeyboardAnimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AADCF9911D8E05B4003C835E /* KeyboardAnimator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AA879C4F1DAE876C00385820 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA879C4A1DAE876C00385820 /* KeyboardAnimator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AADCF8E31D8DAC64003C835E;
+			remoteInfo = "KeyboardAnimator iOS";
+		};
+		AA879C511DAE876C00385820 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA879C4A1DAE876C00385820 /* KeyboardAnimator.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AADCF8EC1D8DAC64003C835E;
+			remoteInfo = "KeyboardAnimator iOS Tests";
+		};
 		AADCF9741D8E058F003C835E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AADCF9571D8E058F003C835E /* Project object */;
@@ -35,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA879C4A1DAE876C00385820 /* KeyboardAnimator.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KeyboardAnimator.xcodeproj; path = ../KeyboardAnimator.xcodeproj; sourceTree = "<group>"; };
 		AADCF95F1D8E058F003C835E /* KeyboardAnimatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyboardAnimatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AADCF9621D8E058F003C835E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AADCF9641D8E058F003C835E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AADCF9921D8E05B4003C835E /* KeyboardAnimator.framework in Frameworks */,
+				AA879C531DAE878E00385820 /* KeyboardAnimator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,9 +92,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA879C4B1DAE876C00385820 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA879C501DAE876C00385820 /* KeyboardAnimator.framework */,
+				AA879C521DAE876C00385820 /* KeyboardAnimator iOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AADCF9561D8E058F003C835E = {
 			isa = PBXGroup;
 			children = (
+				AA879C4A1DAE876C00385820 /* KeyboardAnimator.xcodeproj */,
 				AADCF9611D8E058F003C835E /* KeyboardAnimatorExample */,
 				AADCF9761D8E058F003C835E /* KeyboardAnimatorExampleTests */,
 				AADCF9811D8E058F003C835E /* KeyboardAnimatorExampleUITests */,
@@ -230,6 +255,12 @@
 			mainGroup = AADCF9561D8E058F003C835E;
 			productRefGroup = AADCF9601D8E058F003C835E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AA879C4B1DAE876C00385820 /* Products */;
+					ProjectRef = AA879C4A1DAE876C00385820 /* KeyboardAnimator.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				AADCF95E1D8E058F003C835E /* KeyboardAnimatorExample */,
@@ -238,6 +269,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AA879C501DAE876C00385820 /* KeyboardAnimator.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KeyboardAnimator.framework;
+			remoteRef = AA879C4F1DAE876C00385820 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AA879C521DAE876C00385820 /* KeyboardAnimator iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KeyboardAnimator iOS Tests.xctest";
+			remoteRef = AA879C511DAE876C00385820 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AADCF95D1D8E058F003C835E /* Resources */ = {
@@ -517,6 +565,7 @@
 				AADCF9891D8E058F003C835E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AADCF98A1D8E058F003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimatorExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +574,7 @@
 				AADCF98C1D8E058F003C835E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AADCF98D1D8E058F003C835E /* Build configuration list for PBXNativeTarget "KeyboardAnimatorExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -533,6 +583,7 @@
 				AADCF98F1D8E058F003C835E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

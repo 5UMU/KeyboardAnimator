@@ -9,7 +9,8 @@
 import UIKit
 import KeyboardAnimator
 
-class ViewController: UIViewController, KeyboardAnimatorDataSource {
+class ViewController: UIViewController, KeyboardAnimatorDataSource, KeyboardAnimatorDelegate {
+
   @IBOutlet private weak var textField: UITextField!
 
   let keyboardAnimator = KeyboardAnimator()
@@ -24,12 +25,7 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource {
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized))
     view.addGestureRecognizer(tapGestureRecognizer)
 
-    keyboardAnimator.register()
     keyboardAnimator.dataSource = self
-  }
-
-  deinit {
-    keyboardAnimator.deregister()
   }
 
   override func didReceiveMemoryWarning() {
@@ -42,8 +38,9 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource {
   }
 
   // MARK: KeyboardAnimatorDataSource
-  public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
-    print("direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+  public func updateConstraintsForKeyboardTransition(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
+    print("updateConstraintsForKeyboardTransition: direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+
     switch direction {
     case .up:
       bottomConstraint.constant = bottomConstraintConstant + keyboardFrame.height
@@ -52,9 +49,17 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource {
     }
   }
 
+  public func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
+    print("animateWithKeyboardAnimation: direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+  }
+
   weak public var keyboardAnimatorView: UIView? {
     return view
   }
 
+  // MARK: KeyboardAnimatorDelegate
+  func keyboardWillTransition(_ direction: KeyboardDirection, notification: Notification) {
+    print("keyboardWillTransition: direction=\(direction), notification=\(notification)")
+  }
 }
 
