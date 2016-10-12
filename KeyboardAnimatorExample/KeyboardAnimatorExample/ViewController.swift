@@ -13,10 +13,14 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource {
   @IBOutlet private weak var textField: UITextField!
 
   let keyboardAnimator = KeyboardAnimator()
+  @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+  var bottomConstraintConstant: CGFloat!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+
+    bottomConstraintConstant = bottomConstraint.constant
+
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized))
     view.addGestureRecognizer(tapGestureRecognizer)
 
@@ -40,6 +44,12 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource {
   // MARK: KeyboardAnimatorDataSource
   public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
     print("direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+    switch direction {
+    case .up:
+      bottomConstraint.constant = bottomConstraintConstant + keyboardFrame.height
+    case .down:
+      bottomConstraint.constant = bottomConstraintConstant
+    }
   }
 
   weak public var keyboardAnimatorView: UIView? {

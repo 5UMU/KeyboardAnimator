@@ -9,14 +9,15 @@
 import UIKit
 public protocol KeyboardAnimatorDataSource: class {
   func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: Any?)
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: Any?)
+
   weak var keyboardAnimatorView: UIView? { get }
 }
 
 public extension KeyboardAnimatorDataSource {
   public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {}
 
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: Any?) {}
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: Any?) {}
 }
 
 public protocol KeyboardAnimatorDelegate: class {
@@ -111,18 +112,19 @@ open class KeyboardAnimator {
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
     let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
     let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-    let keyboardFrmae = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+    let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 
     self.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
 
-    dataSource?.updateConstraintsForKeyboardTransition(direction: direction, keyboardFrame: keyboardFrmae, userInfo: userInfo)
+    dataSource?.updateConstraintsForKeyboardTransition(direction: direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
 
     UIView.animate(
       withDuration: duration,
       delay: 0,
       options: animationCurve,
-      animations: {
-        self.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
+      animations: { [weak self] in
+        self?.dataSource?.animateWithKeyboardAnimation(direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
+        self?.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
       },
       completion: nil
     )
