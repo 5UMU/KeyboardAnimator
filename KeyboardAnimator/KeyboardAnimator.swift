@@ -8,65 +8,49 @@
 
 import UIKit
 public protocol KeyboardAnimatorDataSource: class {
-  func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: Any?)
+  func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: AnyObject?)
+  func animateWithKeyboardAnimation(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: AnyObject?)
 
   weak var keyboardAnimatorView: UIView? { get }
 }
 
-public extension KeyboardAnimatorDataSource {
-  public func updateConstraintsForKeyboardTransition(direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {}
-
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: Any?) {}
-}
-
 public protocol KeyboardAnimatorDelegate: class {
-  func keyboardWillTransition(direction: KeyboardDirection, notification: Notification)
+  func keyboardWillTransition(direction: KeyboardDirection, notification: NSNotification)
 }
 
 public enum KeyboardDirection {
   // swiftlint:disable:next type_name
-  case up, down
+  case Up, Down
 }
 
-public enum KeyboardAnimatorError: Error {
-  case MissingUserInfo
-}
-
-open class KeyboardAnimator {
+public class KeyboardAnimator {
   public weak var dataSource: KeyboardAnimatorDataSource?
   public weak var delegate: KeyboardAnimatorDelegate?
 
   private weak var showObserver: AnyObject?
   private weak var hideObserver: AnyObject?
 
-  public func register() {
+  private func register() {
 
-    let center = NotificationCenter.default
+    let center = NSNotificationCenter.defaultCenter()
 
-    let notificationHandler = { [weak self] (notification: Notification) -> Void in
-      do {
-        try self?.keyboardWillTransition(notification: notification)
-      } catch KeyboardAnimatorError.MissingUserInfo {
-        print("could not transition keyboard for notification \(notification) because there was no userInfo")
-      } catch {
-        print("could not transition keyboard for notification \(notification) because an unknown error occurred \(error)")
-      }
+    let notificationHandler = { [weak self] (notification: NSNotification) -> Void in
+      self?.keyboardWillTransition(notification)
     }
 
     if showObserver == nil {
       //            print("registering keyboard animation show observer for \(dataSource)")
-      showObserver = center.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main, using: notificationHandler)
+      showObserver = center.addObserverForName(UIKeyboardWillShowNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: notificationHandler)
     }
 
     if hideObserver == nil {
       //            print("registering keyboard animation hide observer for \(dataSource)")
-      hideObserver = center.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main, using: notificationHandler)
+      hideObserver = center.addObserverForName(UIKeyboardWillHideNotification, object: nil, queue: NSOperationQueue.mainQueue(), usingBlock: notificationHandler)
     }
   }
 
-  public func deregister() {
-    let center = NotificationCenter.default
+  private func deregister() {
+    let center = NSNotificationCenter.defaultCenter()
 
     if let showObserver = showObserver {
       //            print("deregistering keyboard animation show observer for \(dataSource)")
@@ -81,45 +65,46 @@ open class KeyboardAnimator {
     }
   }
 
-  public init() {}
+  public init() {
+    register()
+  }
 
   deinit {
     deregister()
   }
 
-  func keyboardWillTransition(notification: Notification) throws {
+  private func keyboardWillTransition(notification: NSNotification) {
     var direction: KeyboardDirection!
     switch notification.name {
-    case NSNotification.Name.UIKeyboardWillShow:
-      direction = .up
-    case NSNotification.Name.UIKeyboardWillHide:
-      direction = .down
+    case UIKeyboardWillShowNotification:
+      direction = .Up
+    case UIKeyboardWillHideNotification:
+      direction = .Down
     default:
       break
     }
 
-    try animateKeyboardTransition(direction: direction, userInfo: notification.userInfo)
-    delegate?.keyboardWillTransition(direction: direction, notification: notification)
+    animateKeyboardTransition(direction, userInfo: notification.userInfo)
+    delegate?.keyboardWillTransition(direction, notification: notification)
   }
 
-  func animateKeyboardTransition(direction: KeyboardDirection, userInfo: [AnyHashable: Any]?) throws {
+  private func animateKeyboardTransition(direction: KeyboardDirection, userInfo: AnyObject?) {
 
     guard let userInfo = userInfo else {
-      throw KeyboardAnimatorError.MissingUserInfo
+      return
     }
 
-    let duration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+    let duration: NSTimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-    let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+    let animationCurveRaw = animationCurveRawNSN?.unsignedLongValue ?? UIViewAnimationOptions.CurveEaseInOut.rawValue
     let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-    let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+    let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() ?? CGRect.zero
 
-    self.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
+    dataSource?.keyboardAnimatorView?.layoutIfNeeded()
+    dataSource?.updateConstraintsForKeyboardTransition(direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
 
-    dataSource?.updateConstraintsForKeyboardTransition(direction: direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
-
-    UIView.animate(
-      withDuration: duration,
+    UIView.animateWithDuration(
+      duration,
       delay: 0,
       options: animationCurve,
       animations: { [weak self] in
@@ -130,4 +115,3 @@ open class KeyboardAnimator {
     )
   }
 }
-
