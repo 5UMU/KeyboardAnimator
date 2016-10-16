@@ -8,8 +8,8 @@
 
 import UIKit
 public protocol KeyboardAnimatorDataSource: class {
-  func updateConstraintsForKeyboardTransition(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
-  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
+  func updateConstraintsForKeyboardTransition(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
+  func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: [AnyHashable: Any]?)
 
   weak var keyboardAnimatorView: UIView? { get }
 }
@@ -95,17 +95,18 @@ open class KeyboardAnimator {
     let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
     let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions().rawValue
     let animationCurve: UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-    let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+    let beginKeyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
+    let endKeyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 
     dataSource?.keyboardAnimatorView?.layoutIfNeeded()
-    dataSource?.updateConstraintsForKeyboardTransition(direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
+    dataSource?.updateConstraintsForKeyboardTransition(direction, beginKeyboardFrame: beginKeyboardFrame, endKeyboardFrame: endKeyboardFrame, userInfo: userInfo)
 
     UIView.animate(
       withDuration: duration,
       delay: 0,
       options: animationCurve,
       animations: { [weak self] in
-        self?.dataSource?.animateWithKeyboardAnimation(direction, keyboardFrame: keyboardFrame, userInfo: userInfo)
+        self?.dataSource?.animateWithKeyboardAnimation(direction, beginKeyboardFrame: beginKeyboardFrame, endKeyboardFrame: endKeyboardFrame, userInfo: userInfo)
         self?.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
       },
       completion: nil
