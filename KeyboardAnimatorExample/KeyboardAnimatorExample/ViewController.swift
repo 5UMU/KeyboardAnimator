@@ -38,19 +38,19 @@ class ViewController: UIViewController, KeyboardAnimatorDataSource, KeyboardAnim
   }
 
   // MARK: KeyboardAnimatorDataSource
-  public func updateConstraintsForKeyboardTransition(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
-    print("updateConstraintsForKeyboardTransition: direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+  public func updateConstraintsForKeyboardTransition(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: [AnyHashable: Any]?) {
+    print("updateConstraintsForKeyboardTransition: direction=\(direction), beginKeyboardFrame=\(beginKeyboardFrame), endKeyboardFrame=\(endKeyboardFrame), userInfo=\(userInfo)")
 
     switch direction {
     case .up:
-      bottomConstraint.constant = bottomConstraintConstant + keyboardFrame.height
+      bottomConstraint.constant = bottomConstraintConstant + endKeyboardFrame.height
     case .down:
       bottomConstraint.constant = bottomConstraintConstant
     }
   }
 
-  public func animateWithKeyboardAnimation(_ direction: KeyboardDirection, keyboardFrame: CGRect, userInfo: [AnyHashable : Any]?) {
-    print("animateWithKeyboardAnimation: direction=\(direction), keyboardFrame=\(keyboardFrame), userInfo=\(userInfo)")
+  public func animateWithKeyboardAnimation(_ direction: KeyboardDirection, beginKeyboardFrame: CGRect, endKeyboardFrame: CGRect, userInfo: [AnyHashable: Any]?) {
+    print("animateWithKeyboardAnimation: direction=\(direction), beginKeyboardFrame=\(beginKeyboardFrame), endKeyboardFrame=\(endKeyboardFrame), userInfo=\(userInfo)")
   }
 
   weak public var keyboardAnimatorView: UIView? {

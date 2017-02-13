@@ -102,14 +102,14 @@ open class KeyboardAnimator {
     dataSource?.updateConstraintsForKeyboardTransition(direction, beginKeyboardFrame: beginKeyboardFrame, endKeyboardFrame: endKeyboardFrame, userInfo: userInfo)
 
     UIView.animate(
-      withDuration: duration,
-      delay: 0,
-      options: animationCurve,
-      animations: { [weak self] in
-        self?.dataSource?.animateWithKeyboardAnimation(direction, beginKeyboardFrame: beginKeyboardFrame, endKeyboardFrame: endKeyboardFrame, userInfo: userInfo)
-        self?.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
-      },
-      completion: nil
+                   withDuration: duration,
+                   delay: 0,
+                   options: animationCurve,
+                   animations: { [weak self] in
+      self?.dataSource?.animateWithKeyboardAnimation(direction, beginKeyboardFrame: beginKeyboardFrame, endKeyboardFrame: endKeyboardFrame, userInfo: userInfo)
+      self?.dataSource?.keyboardAnimatorView?.layoutIfNeeded()
+    },
+                   completion: nil
     )
   }
 }
